@@ -1,0 +1,19 @@
+{
+    "name": "htutwaiphyoe-backend",
+    "version": "1.0.0",
+    "description": "API for portfolio website",
+    "main": "app.js",
+    "scripts": {
+        "start": "nodemon app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/htutwaiphyoe/htutwaiphyoe-backend.git"
+    },
+    "author": "htutwaiphyoe",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/htutwaiphyoe/htutwaiphyoe-backend/issues"
+    },
+    "homepage": "https://github.com/htutwaiphyoe/htutwaiphyoe-backend#readme"
+}
