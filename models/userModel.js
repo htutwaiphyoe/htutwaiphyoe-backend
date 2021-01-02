@@ -18,11 +18,6 @@ const userSchema = new mongoose.Schema({
         required: [true, "Missing email"],
         validate: [validator.isEmail, "Invalid email"],
     },
-    role: {
-        type: String,
-        enum: ["user", "admin"],
-        default: "user",
-    },
     password: {
         type: String,
         minlength: [8, "Password must be at least 8 characters"],
@@ -58,5 +53,10 @@ userSchema.pre("save", async function (next) {
 
     next();
 });
+
+// instance methods
+userSchema.methods.checkPassword = async function (inputPassword, hashPassword) {
+    return await bcrypt.compare(inputPassword, hashPassword);
+};
 
 module.exports = mongoose.model("User", userSchema);
