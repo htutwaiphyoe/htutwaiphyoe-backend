@@ -17,7 +17,9 @@ app.use(express.json());
 // blogs
 app.use("/api/blogs", blogRouter);
 // authentication
-app.use("/api/auth", authRouter);
+if (process.env.NODE_ENV !== "production") {
+    app.use("/api/auth", authRouter);
+}
 
 // handling unhandled routes
 app.all("*", (req, res, next) => {

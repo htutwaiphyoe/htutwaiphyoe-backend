@@ -1,13 +1,12 @@
+const util = require("util");
+
 const jwt = require("jsonwebtoken");
 
 const catchError = require("../utils/catchError");
 const User = require("../models/userModel");
 const AppError = require("../utils/AppError");
 
-const generateJWT = (payload) =>
-    jwt.sign(payload, process.env.JWT_SECRET_KEY, {
-        expiresIn: process.env.JWT_EXPIRES_IN,
-    });
+const generateJWT = (payload) => jwt.sign(payload, process.env.JWT_SECRET_KEY);
 
 const sendResponseWithToken = (statusCode, user, res) => {
     // generate token
@@ -59,4 +58,31 @@ exports.login = catchError(async (req, res, next) => {
 
     // send response
     sendResponseWithToken(200, user, res);
+});
+
+exports.protect = catchError(async (req, res, next) => {
+    let token;
+
+    // get token
+    if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
+        token = req.headers.authorization.split(" ")[1];
+    }
+
+    // check whether token exists
+    if (!token) {
+        return next(new AppError("You are not logged in!", 401));
+    }
+
+    // verify token
+    const decoded = await util.promisify(jwt.verify)(token, process.env.JWT_SECRET_KEY);
+
+    // check user
+    const user = await User.findById(decoded.id);
+
+    if (!user) {
+        return next(new AppError("No user found", 401));
+    }
+    req.user = user;
+
+    next();
 });
