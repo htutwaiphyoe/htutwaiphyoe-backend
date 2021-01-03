@@ -1,3 +1,4 @@
 .prettierrc
 .eslintrc.json
 node_modules/
+.env
