@@ -8,19 +8,20 @@ const blogSchema = new mongoose.Schema(
             trim: true,
             required: [true, "Missing blog title"],
         },
-        topic: {
+        tag: {
             type: String,
             trim: true,
             lowercase: true,
             required: [true, "Missing blog topic"],
         },
-        duration: {
+        readTime: {
             type: Number,
             default: 3,
         },
         createdAt: {
             type: Date,
             required: [true, "Missing blog date"],
+            default: Date.now(),
         },
         imageCover: {
             type: String,
@@ -28,8 +29,7 @@ const blogSchema = new mongoose.Schema(
             trim: true,
         },
         body: {
-            type: String,
-            trim: true,
+            type: Array,
             required: [true, "Missing blog body"],
         },
     },
