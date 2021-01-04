@@ -10,6 +10,6 @@ router.use(authController.protect);
 
 router.route("/").get(blogController.getAllBlogs).post(blogController.createNewBlog);
 
-router.route("/:id").get(blogController.getSingleBlog);
+router.route("/:slug").get(blogController.getSingleBlog);
 
 module.exports = router;

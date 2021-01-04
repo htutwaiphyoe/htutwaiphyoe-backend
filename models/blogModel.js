@@ -25,6 +25,13 @@ const blogSchema = new mongoose.Schema(
             trim: true,
             required: [true, "Missing blog title"],
         },
+        slug: {
+            type: String,
+            trim: true,
+            lowercase: true,
+            required: [true, "Missing slug"],
+            unique: true,
+        },
         tag: {
             type: String,
             trim: true,

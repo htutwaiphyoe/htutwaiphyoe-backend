@@ -1,5 +1,6 @@
 const Blog = require("../models/blogModel");
 const catchError = require("../utils/catchError");
+const AppError = require("../utils/AppError");
 
 exports.getAllBlogs = catchError(async (req, res, next) => {
     const blogs = await Blog.find();
@@ -24,8 +25,11 @@ exports.createNewBlog = catchError(async (req, res, next) => {
 });
 
 exports.getSingleBlog = catchError(async (req, res, next) => {
-    const blog = await Blog.findById(req.params.id);
+    const blog = await Blog.findOne({ slug: req.params.slug });
 
+    if (!blog) {
+        return next(new AppError("No blog found ⚠", 404));
+    }
     res.status(200).json({
         status: "success",
         data: {
