@@ -5,6 +5,7 @@ const cors = require("cors");
 // own modules
 const blogRouter = require("./routers/blogRouter");
 const authRouter = require("./routers/authRouter");
+const contactRouter = require("./routers/contactRouter");
 const errorController = require("./controllers/errorController");
 const AppError = require("./utils/AppError");
 
@@ -19,6 +20,10 @@ app.use(cors());
 // api routes
 // blogs
 app.use("/api/blogs", blogRouter);
+
+// contact
+app.use("/api/contacts", contactRouter);
+
 // authentication
 if (process.env.NODE_ENV !== "production") {
     app.use("/api/auth", authRouter);
