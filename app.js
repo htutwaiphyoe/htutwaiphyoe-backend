@@ -1,5 +1,6 @@
 // third-party modules
 const express = require("express");
+const cors = require("cors");
 
 // own modules
 const blogRouter = require("./routers/blogRouter");
@@ -13,6 +14,8 @@ const app = express();
 // body parser
 app.use(express.json());
 
+// CORS
+app.use(cors());
 // api routes
 // blogs
 app.use("/api/blogs", blogRouter);
