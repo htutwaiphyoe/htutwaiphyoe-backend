@@ -1,6 +1,23 @@
 // third-party modules
 const mongoose = require("mongoose");
 
+// const bodySchema = new mongoose.Schema({
+//     type: {
+//         type: String,
+//         required: [true, "Missing type"],
+//         trim: true,
+//         enum: {
+//             values: ["text", "heading", "code", "link", "image"],
+//             message: "Type should be one of text, heading ,code, link and image",
+//         },
+//     },
+//     body: {
+//         type: String,
+//         required: [true, "Missing body"],
+//         trim: true,
+//     },
+// });
+
 const blogSchema = new mongoose.Schema(
     {
         title: {
@@ -11,12 +28,11 @@ const blogSchema = new mongoose.Schema(
         tag: {
             type: String,
             trim: true,
-            lowercase: true,
-            required: [true, "Missing blog topic"],
+            required: [true, "Missing blog tag"],
         },
         readTime: {
             type: Number,
-            default: 3,
+            default: 5,
         },
         createdAt: {
             type: Date,
@@ -29,6 +45,7 @@ const blogSchema = new mongoose.Schema(
             trim: true,
         },
         body: {
+            // type: [bodySchema],
             type: Array,
             required: [true, "Missing blog body"],
         },
