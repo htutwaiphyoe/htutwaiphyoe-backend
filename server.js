@@ -20,7 +20,7 @@ mongoose.connect(db, {
 });
 
 mongoose.connection.on("connected", () => {
-    console.log("Database connected");
+    // console.log("Database connected");
 });
 
 const port = process.env.PORT || 9000;
