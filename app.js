@@ -1,6 +1,7 @@
 // third-party modules
 const express = require("express");
 const cors = require("cors");
+const rateLimit = require("express-rate-limit");
 
 // own modules
 const blogRouter = require("./routers/blogRouter");
@@ -12,6 +13,13 @@ const AppError = require("./utils/AppError");
 const app = express();
 
 // Middlewares
+// rate limit
+const limiter = rateLimit({
+    windowMs: 60 * 60 * 1000,
+    max: 1000,
+    message: "Too many requests, please try again in an hour",
+});
+app.use("/api", limiter);
 // body parser
 app.use(express.json());
 
