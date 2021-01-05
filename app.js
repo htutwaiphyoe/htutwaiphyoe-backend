@@ -2,6 +2,7 @@
 const express = require("express");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
+const helmet = require("helmet");
 
 // own modules
 const blogRouter = require("./routers/blogRouter");
@@ -13,6 +14,8 @@ const AppError = require("./utils/AppError");
 const app = express();
 
 // Middlewares
+// secure http headers
+app.use(helmet());
 // rate limit
 const limiter = rateLimit({
     windowMs: 60 * 60 * 1000,
