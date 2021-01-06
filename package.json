@@ -28,7 +28,8 @@
         "jsonwebtoken": "^8.5.1",
         "mongoose": "^5.11.9",
         "mongoose-unique-validator": "^2.0.3",
-        "validator": "^13.5.2"
+        "validator": "^13.5.2",
+        "xss-clean": "^0.1.1"
     },
     "engines": {
         "node": ">=10.0.0"

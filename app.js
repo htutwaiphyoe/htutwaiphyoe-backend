@@ -4,6 +4,7 @@ const cors = require("cors");
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
+const xss = require("xss-clean");
 
 // own modules
 const blogRouter = require("./routers/blogRouter");
@@ -17,6 +18,7 @@ const app = express();
 // Middlewares
 // secure http headers
 app.use(helmet());
+
 // rate limit
 const limiter = rateLimit({
     windowMs: 60 * 60 * 1000,
@@ -24,13 +26,19 @@ const limiter = rateLimit({
     message: "Too many requests, please try again in an hour",
 });
 app.use("/api", limiter);
+
 // body parser
 app.use(express.json({ limit: "10mb" }));
 
-// Input Sanitization
+// data sanitization
 app.use(mongoSanitize());
+
+// xss
+app.use(xss());
+
 // CORS
 app.use(cors());
+
 // api routes
 // blogs
 app.use("/api/blogs", blogRouter);
