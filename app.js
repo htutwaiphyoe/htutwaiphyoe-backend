@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
+const mongoSanitize = require("express-mongo-sanitize");
 
 // own modules
 const blogRouter = require("./routers/blogRouter");
@@ -26,6 +27,8 @@ app.use("/api", limiter);
 // body parser
 app.use(express.json({ limit: "10mb" }));
 
+// Input Sanitization
+app.use(mongoSanitize());
 // CORS
 app.use(cors());
 // api routes
