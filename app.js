@@ -5,6 +5,7 @@ const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
+const hpp = require("hpp");
 
 // own modules
 const blogRouter = require("./routers/blogRouter");
@@ -35,6 +36,9 @@ app.use(mongoSanitize());
 
 // xss
 app.use(xss());
+
+// parameter pollution
+app.use(hpp());
 
 // CORS
 app.use(cors());
